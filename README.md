@@ -1,23 +1,35 @@
-# MCP (Model Context Protocol) Server
+# D0UGWITHSEISMIC/WITHSEISMIC-MCP
+
+![WithSeismic MCP](withseismic-mcp.png)
+
+```
+SYSTEMS ONLINE • NEURAL INTERFACE ACTIVE • COMBAT DATA ANALYSIS • TACTICAL OVERLAY ENABLED • PERFORMANCE METRICS NOMINAL
+```
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18.x-green.svg)](https://nodejs.org/)
+[![pnpm](https://img.shields.io/badge/pnpm-8.x-orange.svg)](https://pnpm.io/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da.svg?logo=discord&logoColor=white)](https://discord.gg/BX25FcS53N)
 
 A TypeScript implementation of an MCP server that provides tools and prompts for AI model interactions. This server is built using the `@modelcontextprotocol/sdk` and follows TypeScript best practices.
 
-## Overview
+## ://OVERVIEW
 
 The MCP server provides a standardized way to expose functionality to AI models through:
 
-- **Tools**: Executable functions that models can call
-- **Prompts**: Template-based message generators for model interactions
+- **TOOLS**: Executable functions that models can call
+- **PROMPTS**: Template-based message generators for model interactions
 
-## Getting Started
+## ://GETTING_STARTED
 
-### Installation
+### INSTALLATION
 
 ```bash
 pnpm install
 ```
 
-### Running the Server
+### RUNNING_THE_SERVER
 
 Two modes are available:
 
@@ -37,9 +49,9 @@ pnpm start:sse # Production
 
 When running in SSE mode, connect to: `http://localhost:3001/sse`
 
-## Core Concepts
+## ://CORE_CONCEPTS
 
-### Tools
+### TOOLS
 
 Tools are executable functions that models can invoke. Each tool:
 
@@ -51,7 +63,6 @@ Example tool:
 
 ```typescript
 import { z } from "zod";
-import { zodToJsonSchema } from "zod-to-json-schema";
 import { Tool } from "../core";
 
 const MyToolInputSchema = z.object({
@@ -66,8 +77,8 @@ export const myTool = new Tool(
   {
     name: "myTool",
     description: "What my tool does",
-    inputSchema: zodToJsonSchema(MyToolInputSchema),
-    outputSchema: zodToJsonSchema(MyToolOutputSchema),
+    inputSchema: MyToolInputSchema,
+    outputSchema: MyToolOutputSchema,
   },
   async (args) => {
     const input = MyToolInputSchema.parse(args);
@@ -77,7 +88,7 @@ export const myTool = new Tool(
 );
 ```
 
-### Prompts
+### PROMPTS
 
 Prompts are message generators that help structure model interactions. Each prompt:
 
@@ -116,7 +127,7 @@ export const myPrompt = new Prompt(
 );
 ```
 
-## Adding New Components
+## ://ADDING_NEW_COMPONENTS
 
 ### Creating a New Tool
 
@@ -194,13 +205,32 @@ pnpm test
 3. Handle errors gracefully
 4. Follow the TypeScript guidelines in the codebase
 
-## Contributing
+## ://CONTRIBUTING
 
-1. Create a new branch
-2. Add your tools/prompts
-3. Ensure all tests pass
-4. Submit a pull request
+```
+NEURAL INTERFACE DETECTED • INITIATING COLLABORATION PROTOCOLS • READY FOR UPLINK
+```
 
-## License
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
 
-UNLICENSED - All rights reserved
+- Development workflow
+- Code style guidelines
+- Pull request process
+- Issue reporting
+
+Join our [Discord community](https://discord.gg/withseismic) to connect with other contributors!
+
+## ://SUPPORT
+
+```
+SUPPORT PROTOCOLS ACTIVE • COMMUNICATION CHANNELS OPEN • READY TO ASSIST
+```
+
+- 📫 Email: <hello@withseismic.com>
+- 💬 Discord: [Join our server](https://discord.gg/BX25FcS53N)
+
+## ://LICENSE
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+© 2025 Doug, at WithSeismic dot com.
