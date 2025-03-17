@@ -1,2 +1,2 @@
 // Export all prompts
-export * from "./git-commit";
+export * from "./degpt-content";
