@@ -11,12 +11,23 @@ SYSTEMS ONLINE • NEURAL INTERFACE ACTIVE • COMBAT DATA ANALYSIS • TACTICAL
 [![pnpm](https://img.shields.io/badge/pnpm-8.x-orange.svg)](https://pnpm.io/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da.svg?logo=discord&logoColor=white)](https://discord.gg/BX25FcS53N)
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/RTm6ec?referralCode=dougie)
 
 A TypeScript implementation of an MCP server that provides tools and prompts for AI model interactions. This server is built using the `@modelcontextprotocol/sdk` and follows TypeScript best practices.
 
 ## ://WHY_USE_THIS_MCP_SERVER_TEMPLATE?
 
 While the Model Context Protocol (MCP) is in its early stages, one thing is clear: **rapid adoption requires frictionless development**. This implementation is built with a singular focus: **letting developers focus on building great tools, not infrastructure**.
+
+### INSTANT_DEPLOYMENT
+
+```bash
+# Option 1: One-Click Deploy
+Click the "Deploy on Railway" button above ☝️
+
+# Option 2: Local Setup
+pnpm install && pnpm dev
+```
 
 ### ZERO_FRICTION_DEVELOPMENT
 
