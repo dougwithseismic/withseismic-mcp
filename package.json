@@ -1,0 +1,40 @@
+{
+  "author": "Doug@withseismic.com",
+  "bugs": {
+    "url": "https://github.com/withseismic/withseismic/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.0.1",
+    "@types/node": "^22.13.10",
+    "express": "^4.21.1",
+    "tsup": "^8.0.2",
+    "vitest": "^3.0.8",
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.23.5"
+  },
+  "description": "://WITHSEISMIC_MCP",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@withseismic/typescript-config": "workspace:*",
+    "shx": "^0.3.4",
+    "tsx": "^4.7.0",
+    "typescript": "^5.6.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://withseismic.com",
+  "license": "UNLICENSED",
+  "name": "mcp",
+  "private": true,
+  "scripts": {
+    "build": "tsup",
+    "clean": "shx rm -rf dist",
+    "dev": "tsx watch src/index.ts",
+    "dev:sse": "tsx watch src/sse.ts",
+    "start": "node dist/index.js",
+    "start:sse": "node dist/sse.js"
+  },
+  "type": "module",
+  "version": "1.0.0"
+}
