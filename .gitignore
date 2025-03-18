@@ -28,6 +28,7 @@ out/
 build
 dist
 
+.mastra/
 token.txt
 
 

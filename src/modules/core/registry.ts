@@ -34,7 +34,7 @@ export class Registry {
   constructor(config: RegistryConfig = {}) {
     if (Registry.instance) {
       throw new Error(
-        "Registry is a singleton. Use Registry.getInstance() to access the instance."
+        "Registry is a singleton. Use Registry.getInstance() to access the instance.",
       );
     }
 
@@ -137,7 +137,7 @@ export class Registry {
    * If server is available, it will be connected automatically
    */
   public registerTool<TInput = unknown, TOutput = unknown>(
-    tool: Tool<TInput, TOutput>
+    tool: Tool<TInput, TOutput>,
   ): void {
     if (this.status === RegistryStatus.ERROR) {
       throw new Error("Cannot register tool: Registry is in error state");
@@ -145,7 +145,7 @@ export class Registry {
 
     const isPostInitialization = this.status === RegistryStatus.READY;
     console.log(
-      `🔧 Registering tool${isPostInitialization ? " (post-initialization)" : ""}: ${tool.getName()}`
+      `🔧 Registering tool${isPostInitialization ? " (post-initialization)" : ""}: ${tool.getName()}`,
     );
 
     // This cast is safe because the repository accepts any tool type
@@ -164,7 +164,7 @@ export class Registry {
 
     const isPostInitialization = this.status === RegistryStatus.READY;
     console.log(
-      `💭 Registering prompt${isPostInitialization ? " (post-initialization)" : ""}: ${prompt.getName()}`
+      `💭 Registering prompt${isPostInitialization ? " (post-initialization)" : ""}: ${prompt.getName()}`,
     );
 
     // This cast is safe because the repository accepts any prompt type
@@ -222,7 +222,7 @@ export class Registry {
     ]);
 
     console.log(
-      `\n✅ MCP Server ready with ${tools.length} tools and ${prompts.length} prompts\n`
+      `\n✅ MCP Server ready with ${tools.length} tools and ${prompts.length} prompts\n`,
     );
   }
 }

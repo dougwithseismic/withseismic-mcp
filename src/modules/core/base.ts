@@ -25,7 +25,7 @@ export class ComponentError extends Error {
   constructor(
     public readonly type: ComponentErrorType,
     message: string,
-    public readonly componentName: string
+    public readonly componentName: string,
   ) {
     super(`${type}: ${message}`);
     this.name = "ComponentError";
@@ -90,7 +90,7 @@ export abstract class BaseRepository<
       throw new ComponentError(
         ComponentErrorType.ALREADY_EXISTS,
         `Component ${name} already registered`,
-        name
+        name,
       );
     }
     this.components.set(name, component);
@@ -123,7 +123,7 @@ export abstract class BaseRepository<
    */
   public getAllDefinitions(): TDefinition[] {
     return this.getAll().map(
-      (component) => component.getDefinition() as TDefinition
+      (component) => component.getDefinition() as TDefinition,
     );
   }
 }

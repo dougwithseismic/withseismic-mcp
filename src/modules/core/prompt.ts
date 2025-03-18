@@ -39,7 +39,7 @@ export class PromptGenerationError extends Error {
   constructor(
     public readonly promptName: string,
     message: string,
-    public readonly cause?: unknown
+    public readonly cause?: unknown,
   ) {
     super(`Prompt generation error (${promptName}): ${message}`);
     this.name = "PromptGenerationError";
@@ -54,7 +54,7 @@ export class Prompt<TArgs = unknown> extends BaseComponent<PromptDefinition> {
 
   constructor(
     definition: PromptDefinition,
-    private readonly getMessages: (args: TArgs) => Promise<PromptMessage[]>
+    private readonly getMessages: (args: TArgs) => Promise<PromptMessage[]>,
   ) {
     super(definition);
     // Convert Zod schema to JSON schema
@@ -83,7 +83,7 @@ export class Prompt<TArgs = unknown> extends BaseComponent<PromptDefinition> {
       throw new PromptGenerationError(
         this.getName(),
         "Message generation failed",
-        error
+        error,
       );
     }
   }
@@ -114,7 +114,7 @@ export class PromptRepository<TArgs = unknown> extends BaseRepository<
       throw new ComponentError(
         ComponentErrorType.NOT_FOUND,
         `Cannot unregister: prompt ${name} not found`,
-        name
+        name,
       );
     }
     this.removeComponent(name);
@@ -163,7 +163,7 @@ export class PromptRepository<TArgs = unknown> extends BaseRepository<
           throw new ComponentError(
             ComponentErrorType.NOT_FOUND,
             `Unknown prompt: ${name}`,
-            name
+            name,
           );
         }
 

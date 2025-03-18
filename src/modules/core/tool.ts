@@ -29,7 +29,7 @@ export class ToolExecutionError extends Error {
   constructor(
     public readonly toolName: string,
     message: string,
-    public readonly cause?: unknown
+    public readonly cause?: unknown,
   ) {
     super(`Tool execution error (${toolName}): ${message}`);
     this.name = "ToolExecutionError";
@@ -48,7 +48,7 @@ export class Tool<
 
   constructor(
     definition: ToolDefinition,
-    private readonly execute: (args: TInput) => Promise<TOutput>
+    private readonly execute: (args: TInput) => Promise<TOutput>,
   ) {
     super(definition);
     // Convert Zod schemas to JSON schemas
@@ -113,7 +113,7 @@ export class ToolRepository<
       throw new ComponentError(
         ComponentErrorType.NOT_FOUND,
         `Cannot unregister: tool ${name} not found`,
-        name
+        name,
       );
     }
     this.removeComponent(name);
@@ -155,7 +155,7 @@ export class ToolRepository<
           throw new ComponentError(
             ComponentErrorType.NOT_FOUND,
             `Unknown tool: ${name}`,
-            name
+            name,
           );
         }
 

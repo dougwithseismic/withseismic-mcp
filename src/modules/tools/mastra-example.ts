@@ -66,5 +66,5 @@ export const mastraWeatherTool = new Tool<
 
     // Parse the response into our expected format
     return response.text;
-  }
+  },
 );

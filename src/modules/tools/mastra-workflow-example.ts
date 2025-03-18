@@ -90,5 +90,5 @@ export const planActivitiesTool = new Tool<
       console.error("Error running weather workflow:", error);
       throw error;
     }
-  }
+  },
 );

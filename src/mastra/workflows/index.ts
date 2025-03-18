@@ -1,12 +1,12 @@
-import { openai } from '@ai-sdk/openai';
-import { Agent } from '@mastra/core/agent';
-import { Step, Workflow } from '@mastra/core/workflows';
-import { z } from 'zod';
+import { openai } from "@ai-sdk/openai";
+import { Agent } from "@mastra/core/agent";
+import { Step, Workflow } from "@mastra/core/workflows";
+import { z } from "zod";
 
-const llm = openai('gpt-4o');
+const llm = openai("gpt-4o");
 
 const agent = new Agent({
-  name: 'Weather Agent',
+  name: "Weather Agent",
   model: llm,
   instructions: `
         You are a local activities and travel expert who excels at weather-based planning. Analyze the weather data and provide practical activity recommendations.
@@ -54,16 +54,16 @@ const agent = new Agent({
 });
 
 const fetchWeather = new Step({
-  id: 'fetch-weather',
-  description: 'Fetches weather forecast for a given city',
+  id: "fetch-weather",
+  description: "Fetches weather forecast for a given city",
   inputSchema: z.object({
-    city: z.string().describe('The city to get the weather for'),
+    city: z.string().describe("The city to get the weather for"),
   }),
   execute: async ({ context }) => {
-    const triggerData = context?.getStepResult<{ city: string }>('trigger');
+    const triggerData = context?.getStepResult<{ city: string }>("trigger");
 
     if (!triggerData) {
-      throw new Error('Trigger data not found');
+      throw new Error("Trigger data not found");
     }
 
     const geocodingUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(triggerData.city)}&count=1`;
@@ -115,15 +115,15 @@ const forecastSchema = z.array(
 );
 
 const planActivities = new Step({
-  id: 'plan-activities',
-  description: 'Suggests activities based on weather conditions',
+  id: "plan-activities",
+  description: "Suggests activities based on weather conditions",
   inputSchema: forecastSchema,
   execute: async ({ context, mastra }) => {
     const forecast =
-      context?.getStepResult<z.infer<typeof forecastSchema>>('fetch-weather');
+      context?.getStepResult<z.infer<typeof forecastSchema>>("fetch-weather");
 
     if (!forecast || forecast.length === 0) {
-      throw new Error('Forecast data not found');
+      throw new Error("Forecast data not found");
     }
 
     const prompt = `Based on the following weather forecast for ${forecast[0]?.location}, suggest appropriate activities:
@@ -132,12 +132,12 @@ const planActivities = new Step({
 
     const response = await agent.stream([
       {
-        role: 'user',
+        role: "user",
         content: prompt,
       },
     ]);
 
-    let activitiesText = '';
+    let activitiesText = "";
 
     for await (const chunk of response.textStream) {
       process.stdout.write(chunk);
@@ -152,30 +152,30 @@ const planActivities = new Step({
 
 function getWeatherCondition(code: number): string {
   const conditions: Record<number, string> = {
-    0: 'Clear sky',
-    1: 'Mainly clear',
-    2: 'Partly cloudy',
-    3: 'Overcast',
-    45: 'Foggy',
-    48: 'Depositing rime fog',
-    51: 'Light drizzle',
-    53: 'Moderate drizzle',
-    55: 'Dense drizzle',
-    61: 'Slight rain',
-    63: 'Moderate rain',
-    65: 'Heavy rain',
-    71: 'Slight snow fall',
-    73: 'Moderate snow fall',
-    75: 'Heavy snow fall',
-    95: 'Thunderstorm',
+    0: "Clear sky",
+    1: "Mainly clear",
+    2: "Partly cloudy",
+    3: "Overcast",
+    45: "Foggy",
+    48: "Depositing rime fog",
+    51: "Light drizzle",
+    53: "Moderate drizzle",
+    55: "Dense drizzle",
+    61: "Slight rain",
+    63: "Moderate rain",
+    65: "Heavy rain",
+    71: "Slight snow fall",
+    73: "Moderate snow fall",
+    75: "Heavy snow fall",
+    95: "Thunderstorm",
   };
-  return conditions[code] || 'Unknown';
+  return conditions[code] || "Unknown";
 }
 
 const weatherWorkflow = new Workflow({
-  name: 'weather-workflow',
+  name: "weather-workflow",
   triggerSchema: z.object({
-    city: z.string().describe('The city to get the weather for'),
+    city: z.string().describe("The city to get the weather for"),
   }),
 })
   .step(fetchWeather)

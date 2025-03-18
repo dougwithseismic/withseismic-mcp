@@ -25,7 +25,7 @@ export const createServer = () => {
         tools: {},
         logging: {},
       },
-    }
+    },
   );
 
   // Initialize the existing registry instance with the server
