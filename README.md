@@ -13,7 +13,49 @@ SYSTEMS ONLINE • NEURAL INTERFACE ACTIVE • COMBAT DATA ANALYSIS • TACTICAL
 [![Discord](https://img.shields.io/badge/Discord-Join%20Us-7289da.svg?logo=discord&logoColor=white)](https://discord.gg/BX25FcS53N)
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/RTm6ec?referralCode=dougie)
 
-A TypeScript implementation of an MCP server that provides tools and prompts for AI model interactions. This server is built using the `@modelcontextprotocol/sdk` and follows TypeScript best practices.
+A production-ready MCP server template for hosting your own AI tools and prompts. Deploy remotely or run locally - built for developers who want to expose their tools to AI models without the infrastructure headaches.
+
+## ://WHO_IS_THIS_FOR?
+
+This template is perfect for:
+
+- **AI Tool Developers**: Build and host your own tools that AI models can interact with
+- **Teams & Organizations**: Set up a shared MCP server for your AI applications
+- **Individual Developers**: Quick-start your MCP development with a production-ready setup
+- **API Providers**: Expose your services to AI models through a standardized interface
+
+Whether you want to:
+
+- 🌐 Host a remote MCP server that multiple clients can connect to
+- 🔧 Run locally via stdio for development and testing
+- 🚀 Deploy a production-ready MCP implementation
+- 🛠️ Build tools without worrying about infrastructure
+
+This template provides everything you need to get started.
+
+## ://OVERVIEW
+
+The MCP server provides two ways to expose your tools to AI models:
+
+1. **Remote Server Mode (SSE)**: Deploy as a remote server that multiple clients can connect to
+   - Perfect for production deployments
+    (`pnpm start:sse`)
+   - Supports multiple simultaneous connections
+   - Easy deployment to platforms like Railway
+   - Secure and scalable
+
+2. **Local Mode (stdio)**: Run locally for development and testing
+ (`pnpm start`)
+   - Great for local development
+   - Direct stdio communication
+   - Fast iteration and debugging
+
+Key Features:
+
+- **Tools**: Executable functions that models can call
+- **Prompts**: Template-based message generators
+- **Auto-Discovery**: Automatic registration of your components
+- **Type Safety**: Full TypeScript support throughout
 
 ## ://WHY_USE_THIS_MCP_SERVER_TEMPLATE?
 
@@ -73,13 +115,6 @@ You focus on:
 - 🎯 Building amazing tools
 - 🧠 Creating powerful prompts
 - 🚀 Shipping features
-
-## ://OVERVIEW
-
-The MCP server provides a standardized way to expose functionality to AI models through:
-
-- **TOOLS**: Executable functions that models can call
-- **PROMPTS**: Template-based message generators for model interactions
 
 ## ://GETTING_STARTED
 
