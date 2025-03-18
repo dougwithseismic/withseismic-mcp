@@ -39,7 +39,7 @@ export class PromptGenerationError extends Error {
   constructor(
     public readonly promptName: string,
     message: string,
-    public readonly cause?: unknown,
+    public readonly cause?: unknown
   ) {
     super(`Prompt generation error (${promptName}): ${message}`);
     this.name = "PromptGenerationError";
@@ -54,12 +54,12 @@ export class Prompt<TArgs = unknown> extends BaseComponent<PromptDefinition> {
 
   constructor(
     definition: PromptDefinition,
-    private readonly getMessages: (args: TArgs) => Promise<PromptMessage[]>,
+    private readonly getMessages: (args: TArgs) => Promise<PromptMessage[]>
   ) {
     super(definition);
     // Convert Zod schema to JSON schema
     this.jsonArgsSchema = zodToJsonSchema(definition.argsSchema);
-    // Auto-register with repository
+    // Register with repository during collection phase
     Registry.getPromptRepository<TArgs>().register(this);
   }
 
@@ -83,7 +83,7 @@ export class Prompt<TArgs = unknown> extends BaseComponent<PromptDefinition> {
       throw new PromptGenerationError(
         this.getName(),
         "Message generation failed",
-        error,
+        error
       );
     }
   }
@@ -96,6 +96,30 @@ export class PromptRepository<TArgs = unknown> extends BaseRepository<
   Prompt<TArgs>,
   PromptDefinition
 > {
+  private server?: Server;
+
+  /**
+   * Register a prompt with the repository
+   */
+  public register(prompt: Prompt<TArgs>): void {
+    super.register(prompt);
+  }
+
+  /**
+   * Unregister a prompt by name
+   */
+  public unregister(name: string): void {
+    const prompt = this.get(name);
+    if (!prompt) {
+      throw new ComponentError(
+        ComponentErrorType.NOT_FOUND,
+        `Cannot unregister: prompt ${name} not found`,
+        name
+      );
+    }
+    this.removeComponent(name);
+  }
+
   /**
    * Get all prompt definitions with JSON schemas
    */
@@ -116,6 +140,7 @@ export class PromptRepository<TArgs = unknown> extends BaseRepository<
    * Register all prompt handlers with the MCP server
    */
   public registerWithServer(server: Server): void {
+    this.server = server;
     console.log("💭 Registering prompt handlers with server");
 
     // Register prompt list handler
@@ -138,7 +163,7 @@ export class PromptRepository<TArgs = unknown> extends BaseRepository<
           throw new ComponentError(
             ComponentErrorType.NOT_FOUND,
             `Unknown prompt: ${name}`,
-            name,
+            name
           );
         }
 

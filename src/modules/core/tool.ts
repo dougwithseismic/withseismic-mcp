@@ -29,7 +29,7 @@ export class ToolExecutionError extends Error {
   constructor(
     public readonly toolName: string,
     message: string,
-    public readonly cause?: unknown,
+    public readonly cause?: unknown
   ) {
     super(`Tool execution error (${toolName}): ${message}`);
     this.name = "ToolExecutionError";
@@ -48,13 +48,13 @@ export class Tool<
 
   constructor(
     definition: ToolDefinition,
-    private readonly execute: (args: TInput) => Promise<TOutput>,
+    private readonly execute: (args: TInput) => Promise<TOutput>
   ) {
     super(definition);
     // Convert Zod schemas to JSON schemas
     this.jsonInputSchema = zodToJsonSchema(definition.inputSchema);
     this.jsonOutputSchema = zodToJsonSchema(definition.outputSchema);
-    // Auto-register with repository
+    // Register with repository during collection phase
     Registry.getToolRepository<TInput, TOutput>().register(this);
   }
 
@@ -95,6 +95,30 @@ export class ToolRepository<
   TInput = unknown,
   TOutput = unknown,
 > extends BaseRepository<Tool<TInput, TOutput>, ToolDefinition> {
+  private server?: Server;
+
+  /**
+   * Register a tool with the repository
+   */
+  public register(tool: Tool<TInput, TOutput>): void {
+    super.register(tool);
+  }
+
+  /**
+   * Unregister a tool by name
+   */
+  public unregister(name: string): void {
+    const tool = this.get(name);
+    if (!tool) {
+      throw new ComponentError(
+        ComponentErrorType.NOT_FOUND,
+        `Cannot unregister: tool ${name} not found`,
+        name
+      );
+    }
+    this.removeComponent(name);
+  }
+
   /**
    * Get all tool definitions with JSON schemas
    */
@@ -110,6 +134,9 @@ export class ToolRepository<
    * Register all tool handlers with the MCP server
    */
   public registerWithServer(server: Server): void {
+    this.server = server;
+    console.log("🔧 Registering tool handlers with server");
+
     // Register tool list handler
     server.setRequestHandler(ListToolsRequestSchema, async () => {
       return {
@@ -128,7 +155,7 @@ export class ToolRepository<
           throw new ComponentError(
             ComponentErrorType.NOT_FOUND,
             `Unknown tool: ${name}`,
-            name,
+            name
           );
         }
 

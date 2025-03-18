@@ -38,14 +38,15 @@ This template provides everything you need to get started.
 The MCP server provides two ways to expose your tools to AI models:
 
 1. **Remote Server Mode (SSE)**: Deploy as a remote server that multiple clients can connect to
+
    - Perfect for production deployments
-    (`pnpm start:sse`)
+     (`pnpm start:sse`)
    - Supports multiple simultaneous connections
    - Easy deployment to platforms like Railway
    - Secure and scalable
 
 2. **Local Mode (stdio)**: Run locally for development and testing
- (`pnpm start`)
+   (`pnpm start`)
    - Great for local development
    - Direct stdio communication
    - Fast iteration and debugging

@@ -1,10 +1,14 @@
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import express from "express";
-import { createServer } from "./create-server";
+import { createServer } from "./create-server.js";
+import { config } from "dotenv";
+
+config();
 
 const app = express();
 
-const { server, cleanup } = createServer();
+// Create server and ensure it's registered
+const server = createServer();
 
 let transport: SSEServerTransport;
 
@@ -25,11 +29,8 @@ app.get("/sse", async (req, res) => {
     server.onclose = async () => {
       console.log("Server onclose handler triggered");
       console.log("Server closing, cleaning up...");
-      await cleanup();
       await server.close();
       console.log("Server closed successfully");
-      // Remove the process.exit to keep server running
-      // process.exit(0);
     };
   } catch (err) {
     console.error("Error connecting transport:", err);

@@ -4,35 +4,47 @@
     "url": "https://github.com/withseismic/withseismic/issues"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^1.2.5",
+    "@mastra/client-js": "^0.1.9",
+    "@mastra/core": "^0.6.1",
     "@modelcontextprotocol/sdk": "1.0.1",
     "@slack/web-api": "^7.8.0",
-    "@types/node": "^22.13.10",
+    "add": "^2.0.6",
     "express": "^4.21.1",
+    "pnpm": "^10.6.4",
     "tsup": "^8.0.2",
     "vitest": "^3.0.8",
-    "zod": "^3.23.8",
+    "zod": "^3.24.2",
     "zod-to-json-schema": "^3.23.5"
   },
   "description": "://WITHSEISMIC_MCP",
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/node": "^22.13.10",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "dotenv-cli": "^8.0.0",
+    "mastra": "^0.4.0",
     "shx": "^0.3.4",
-    "tsx": "^4.7.0",
-    "typescript": "^5.6.2"
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2"
   },
   "files": [
     "dist"
   ],
   "homepage": "https://withseismic.com",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "name": "mcp",
   "private": true,
   "scripts": {
     "build": "tsup",
     "clean": "shx rm -rf dist",
-    "dev": "tsx watch src/index.ts",
+    "dev": "dotenv concurrently \"pnpm run dev:sse\" \"pnpm run dev:mastra\"",
+    "dev:mastra": "dotenv mastra dev --port $MASTRA_PORT",
     "dev:sse": "tsx watch src/sse.ts",
-    "start": "node dist/index.js",
+    "start": "dotenv concurrently \"pnpm run start:sse\" \"pnpm run start:mastra\"",
+    "start:mastra": "dotenv mastra start --port $MASTRA_PORT",
     "start:sse": "node dist/sse.js"
   },
   "type": "module",

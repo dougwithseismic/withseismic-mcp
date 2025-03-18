@@ -1,11 +1,16 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
-import { Registry } from "./modules/core";
+import { registry } from "./lib/registry-instance.js";
 
 // Import modules to ensure tools and prompts are loaded and registered
-import "./modules/tools";
 import "./modules/prompts";
+import "./modules/tools";
 
 export const createServer = () => {
+  // If server already exists in registry, return it
+  if (registry.getServer()) {
+    return registry.getServer()!;
+  }
+
   console.log("🚀 Creating MCP server");
 
   const server = new Server(
@@ -20,17 +25,12 @@ export const createServer = () => {
         tools: {},
         logging: {},
       },
-    },
+    }
   );
 
-  // Register repositories with server
-  Registry.getInstance().registerWithServer(server);
-  console.log("✅ Repositories registered successfully");
+  // Initialize the existing registry instance with the server
+  registry.initialize({ server });
 
-  const cleanup = async () => {
-    console.log("🧹 Running server cleanup");
-    // Add any cleanup logic here
-  };
-
-  return { server, cleanup };
+  console.log("✅ MCP Server created successfully");
+  return server;
 };

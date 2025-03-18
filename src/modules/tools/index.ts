@@ -5,3 +5,5 @@ export * from "./slack";
 export * from "./slack-channels";
 export * from "./slack-users";
 export * from "./slack-utils";
+export * from "./mastra-example";
+export * from "./mastra-workflow-example";

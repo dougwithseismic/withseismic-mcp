@@ -15,6 +15,7 @@ export enum ComponentErrorType {
   NOT_FOUND = "NOT_FOUND",
   INVALID_ARGS = "INVALID_ARGS",
   EXECUTION_ERROR = "EXECUTION_ERROR",
+  ALREADY_EXISTS = "ALREADY_EXISTS",
 }
 
 /**
@@ -24,7 +25,7 @@ export class ComponentError extends Error {
   constructor(
     public readonly type: ComponentErrorType,
     message: string,
-    public readonly componentName: string,
+    public readonly componentName: string
   ) {
     super(`${type}: ${message}`);
     this.name = "ComponentError";
@@ -84,7 +85,22 @@ export abstract class BaseRepository<
    * @throws {ComponentError} If component with same name already exists
    */
   public register(component: TComponent): void {
-    this.components.set(component.getName(), component);
+    const name = component.getName();
+    if (this.components.has(name)) {
+      throw new ComponentError(
+        ComponentErrorType.ALREADY_EXISTS,
+        `Component ${name} already registered`,
+        name
+      );
+    }
+    this.components.set(name, component);
+  }
+
+  /**
+   * Protected method to remove a component from the repository
+   */
+  protected removeComponent(name: string): void {
+    this.components.delete(name);
   }
 
   /**
@@ -107,7 +123,7 @@ export abstract class BaseRepository<
    */
   public getAllDefinitions(): TDefinition[] {
     return this.getAll().map(
-      (component) => component.getDefinition() as TDefinition,
+      (component) => component.getDefinition() as TDefinition
     );
   }
 }
