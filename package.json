@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.0.1",
+    "@slack/web-api": "^7.8.0",
     "@types/node": "^22.13.10",
     "express": "^4.21.1",
     "tsup": "^8.0.2",

@@ -10,7 +10,7 @@ export const createServer = () => {
 
   const server = new Server(
     {
-      name: "example-servers/everything",
+      name: "withseismic/mcp",
       version: "1.0.0",
     },
     {

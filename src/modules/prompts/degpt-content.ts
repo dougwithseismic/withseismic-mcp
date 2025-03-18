@@ -1,6 +1,6 @@
 // ---------- Imports ----------
 import { z } from "zod";
-import { Prompt, PromptMessage } from "../core";
+import { Prompt } from "../core";
 
 // ---------- Schemas ----------
 /**
@@ -43,5 +43,5 @@ Provide the revised text with natural, straightforward language.`,
         },
       },
     ];
-  }
+  },
 );

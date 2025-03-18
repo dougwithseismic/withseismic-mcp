@@ -45,15 +45,18 @@ pnpm install && pnpm dev
 
 ```typescript
 // That's it. This is all you need to create a tool.
-export const myTool = new Tool({
-  name: "myTool",
-  description: "What my tool does",
-  inputSchema: z.object({ query: z.string() }),
-  outputSchema: z.object({ result: z.string() }),
-}, async (args) => {
-  // Your logic here
-  return { result: "Done!" };
-});
+export const myTool = new Tool(
+  {
+    name: "myTool",
+    description: "What my tool does",
+    inputSchema: z.object({ query: z.string() }),
+    outputSchema: z.object({ result: z.string() }),
+  },
+  async (args) => {
+    // Your logic here
+    return { result: "Done!" };
+  },
+);
 ```
 
 We handle:
