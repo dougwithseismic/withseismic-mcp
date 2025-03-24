@@ -1,9 +1,6 @@
 import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import express from "express";
 import { createServer } from "./create-server.js";
-import { config } from "dotenv";
-
-config();
 
 const app = express();
 
