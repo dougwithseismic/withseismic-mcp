@@ -43,6 +43,7 @@
     "build": "tsup",
     "clean": "shx rm -rf dist .mastra",
     "dev": "tsx watch src/sse.ts",
+    "postbuild": "npx playwright install",
     "start": "pnpm run start:sse",
     "start:sse": "node dist/sse.js"
   },

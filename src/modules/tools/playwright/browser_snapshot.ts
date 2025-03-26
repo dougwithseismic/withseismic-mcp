@@ -28,7 +28,7 @@ const BrowserSnapshotToolOutputSchema = z.object({
       z.object({
         type: z.string(),
         text: z.string(),
-      })
+      }),
     )
     .describe("Snapshot content with page information"),
 });
@@ -81,5 +81,5 @@ ${snapshot}
         error instanceof Error ? error.message : String(error);
       throw new Error(`Failed to capture snapshot: ${errorMessage}`);
     }
-  }
+  },
 );

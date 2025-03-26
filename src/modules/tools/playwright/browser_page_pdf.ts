@@ -65,5 +65,5 @@ export const browserPdfTool = new Tool<
         error instanceof Error ? error.message : String(error);
       throw new Error(`Failed to generate PDF: ${errorMessage}`);
     }
-  }
+  },
 );

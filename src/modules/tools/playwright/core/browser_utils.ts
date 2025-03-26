@@ -53,7 +53,7 @@ export class ElementOperations {
    */
   private static createAccessibilityLocator(
     page: Page,
-    { ariaId }: ElementReference
+    { ariaId }: ElementReference,
   ): Locator {
     const locator = page.locator(`aria-ref=${ariaId}`);
     return locator;
@@ -82,7 +82,7 @@ export class ElementOperations {
    */
   static async validateElement(
     page: Page,
-    reference: ElementReference
+    reference: ElementReference,
   ): Promise<{ element: Locator; baseResult: BaseOperationResult }> {
     const { element, exists } = await this.findElement({
       page,

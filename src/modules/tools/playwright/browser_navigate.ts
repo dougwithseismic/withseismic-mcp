@@ -33,7 +33,7 @@ const BrowserNavigateToolOutputSchema = z.object({
       z.object({
         type: z.string(),
         text: z.string(),
-      })
+      }),
     )
     .describe("Accessibility snapshot of page after navigation"),
 });
@@ -93,5 +93,5 @@ ${snapshot}
         error instanceof Error ? error.message : String(error);
       throw new Error(`Navigation failed: ${errorMessage}`);
     }
-  }
+  },
 );

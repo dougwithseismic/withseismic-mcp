@@ -48,5 +48,5 @@ export const browserInitTool = new Tool<
       success: true,
       url: page.url(),
     };
-  }
+  },
 );

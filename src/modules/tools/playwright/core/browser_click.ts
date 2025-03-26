@@ -16,7 +16,7 @@ export const BrowserClickOutputSchema = z.object({
     z.object({
       type: z.string(),
       text: z.string(),
-    })
+    }),
   ),
 });
 
@@ -120,5 +120,5 @@ export const browserClickTool = new Tool<
       page,
       elementRef,
     });
-  }
+  },
 );

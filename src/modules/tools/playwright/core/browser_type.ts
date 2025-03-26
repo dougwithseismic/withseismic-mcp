@@ -111,5 +111,5 @@ export const browserTypeTool = new Tool<
       text,
       delay,
     });
-  }
+  },
 );
